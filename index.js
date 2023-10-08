@@ -94,7 +94,6 @@ export const goToPage = (newPage, data) => {
 
         page = newPage;
         renderApp();
-
         return;
     }
 

@@ -39,9 +39,12 @@ export function renderPostsPageComponent({ appEl }) {
     });
 
     appEl.innerHTML = `<div class="page-container">
-                      <div class="header-container">
-                      <ul class="posts">
-                      ${appHtml}`;
+                        <div class="header-container">
+                        <ul class="posts">
+                        ${appHtml}
+                        </ul>
+                        </div>
+                      </div>`;
 
     HeaderComp;
 
