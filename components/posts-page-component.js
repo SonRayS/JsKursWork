@@ -1,5 +1,4 @@
 import { USER_POSTS_PAGE } from "../routes.js";
-import { renderHeaderComponent } from "./header-component.js";
 import { posts, goToPage } from "../index.js";
 
 export function renderPostsPageComponent({ appEl }) {
@@ -44,10 +43,6 @@ export function renderPostsPageComponent({ appEl }) {
     });
 
     appEl.innerHTML = appHtml;
-
-    renderHeaderComponent({
-        element: document.querySelector(".header-container"),
-    });
 
     for (let el of document.querySelectorAll(".post-header")) {
         el.addEventListener("click", () => {

@@ -18,6 +18,7 @@ import {
 } from "./helpers.js";
 import { onAddPostClick } from "./api.js";
 import { userPosts } from "./api.js";
+import { renderHeaderComponent } from "./components/header-component.js";
 
 /* =========================================================================================== */
 
@@ -111,36 +112,56 @@ const renderApp = () => {
     }
 
     if (page === AUTH_PAGE) {
-        return renderAuthPageComponent({
-            appEl,
-            setUser: (newUser) => {
-                user = newUser;
-                saveUserToLocalStorage(user);
-                goToPage(POSTS_PAGE);
-            },
-            user,
-            goToPage,
-        });
+        return (
+            renderAuthPageComponent({
+                appEl,
+                setUser: (newUser) => {
+                    user = newUser;
+                    saveUserToLocalStorage(user);
+                    goToPage(POSTS_PAGE);
+                },
+                user,
+                goToPage,
+            }),
+            renderHeaderComponent({
+                element: document.querySelector(".header-container"),
+            })
+        );
     }
 
     if (page === ADD_POSTS_PAGE) {
-        return renderAddPostPageComponent({
-            appEl,
-            onAddPostClick,
-        });
+        return (
+            renderAddPostPageComponent({
+                appEl,
+                onAddPostClick,
+            }),
+            renderHeaderComponent({
+                element: document.querySelector(".header-container"),
+            })
+        );
     }
 
     if (page === POSTS_PAGE) {
-        return renderPostsPageComponent({
-            appEl,
-        });
+        return (
+            renderPostsPageComponent({
+                appEl,
+            }),
+            renderHeaderComponent({
+                element: document.querySelector(".header-container"),
+            })
+        );
     }
 
     if (page === USER_POSTS_PAGE) {
         // TODO: реализовать страницу фотографию пользвателя
-        return renderPostsPageComponent({
-            appEl,
-        });
+        return (
+            renderPostsPageComponent({
+                appEl,
+            }),
+            renderHeaderComponent({
+                element: document.querySelector(".header-container"),
+            })
+        );
     }
 };
 
