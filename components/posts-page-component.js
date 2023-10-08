@@ -1,5 +1,6 @@
 import { USER_POSTS_PAGE } from "../routes.js";
 import { posts, goToPage } from "../index.js";
+import { HeaderComp } from "../index.js";
 
 export function renderPostsPageComponent({ appEl }) {
     console.log("Актуальный список постов:", posts);
@@ -10,9 +11,7 @@ export function renderPostsPageComponent({ appEl }) {
      */
 
     const appHtml = posts.map((el, index) => {
-        return `<div class="page-container">
-                  <div class="header-container">
-                    <ul class="posts">
+        return `
                         <li class="post">
                             <div class="post-header" data-user-id="${el.user.id}">
                                 <img src="${el.user.imageUrl}" class="post-header__user-image">
@@ -36,13 +35,15 @@ export function renderPostsPageComponent({ appEl }) {
                             <p class="post-date">
                               19 минут назад
                             </p>
-                        </li>
-                    </ul>
-                  </div>
-                </div>`;
+                        </li>`;
     });
 
-    appEl.innerHTML = appHtml;
+    appEl.innerHTML = `<div class="page-container">
+                      <div class="header-container">
+                      <ul class="posts">
+                      ${appHtml}`;
+
+    HeaderComp;
 
     for (let el of document.querySelectorAll(".post-header")) {
         el.addEventListener("click", () => {

@@ -123,9 +123,7 @@ const renderApp = () => {
                 user,
                 goToPage,
             }),
-            renderHeaderComponent({
-                element: document.querySelector(".header-container"),
-            })
+            HeaderComp
         );
     }
 
@@ -135,9 +133,7 @@ const renderApp = () => {
                 appEl,
                 onAddPostClick,
             }),
-            renderHeaderComponent({
-                element: document.querySelector(".header-container"),
-            })
+            HeaderComp
         );
     }
 
@@ -146,9 +142,7 @@ const renderApp = () => {
             renderPostsPageComponent({
                 appEl,
             }),
-            renderHeaderComponent({
-                element: document.querySelector(".header-container"),
-            })
+            HeaderComp
         );
     }
 
@@ -158,11 +152,13 @@ const renderApp = () => {
             renderPostsPageComponent({
                 appEl,
             }),
-            renderHeaderComponent({
-                element: document.querySelector(".header-container"),
-            })
+            HeaderComp
         );
     }
 };
+
+export const HeaderComp = renderHeaderComponent({
+    element: document.querySelector(".header-container"),
+});
 
 goToPage(POSTS_PAGE);
