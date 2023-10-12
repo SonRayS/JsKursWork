@@ -19,6 +19,7 @@ import {
 import { onAddPostClick } from "./api.js";
 import { userPosts } from "./api.js";
 import { renderHeaderComponent } from "./components/header-component.js";
+import { getElement } from "./components/getElById.js";
 
 /* =========================================================================================== */
 
@@ -100,8 +101,17 @@ export const goToPage = (newPage, data) => {
     throw new Error("страницы не существует");
 };
 
+/* =========================================================================================== */
+
+/**
+ * функц которая запускает страницу renderApp
+ */
+
+/* =========================================================================================== */
+
 const renderApp = () => {
     const appEl = document.getElementById("app");
+
     if (page === LOADING_PAGE) {
         return renderLoadingPageComponent({
             appEl,
@@ -111,53 +121,37 @@ const renderApp = () => {
     }
 
     if (page === AUTH_PAGE) {
-        return (
-            renderAuthPageComponent({
-                appEl,
-                setUser: (newUser) => {
-                    user = newUser;
-                    saveUserToLocalStorage(user);
-                    goToPage(POSTS_PAGE);
-                },
-                user,
-                goToPage,
-            }),
-            HeaderComp
-        );
+        return renderAuthPageComponent({
+            appEl,
+            setUser: (newUser) => {
+                user = newUser;
+                saveUserToLocalStorage(user);
+                goToPage(POSTS_PAGE);
+            },
+            user,
+            goToPage,
+        });
     }
 
     if (page === ADD_POSTS_PAGE) {
-        return (
-            renderAddPostPageComponent({
-                appEl,
-                onAddPostClick,
-            }),
-            HeaderComp
-        );
+        return renderAddPostPageComponent({
+            appEl,
+            onAddPostClick,
+        });
     }
 
     if (page === POSTS_PAGE) {
-        return (
-            renderPostsPageComponent({
-                appEl,
-            }),
-            HeaderComp
-        );
+        return renderPostsPageComponent({
+            appEl,
+        });
     }
 
     if (page === USER_POSTS_PAGE) {
         // TODO: реализовать страницу фотографию пользвателя
-        return (
-            renderPostsPageComponent({
-                appEl,
-            }),
-            HeaderComp
-        );
+        return renderPostsPageComponent({
+            appEl,
+        });
     }
 };
-
-export const HeaderComp = renderHeaderComponent({
-    element: document.querySelector(".header-container"),
-});
 
 goToPage(POSTS_PAGE);
