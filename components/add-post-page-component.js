@@ -2,6 +2,7 @@ import { renderUploadImageComponent } from "./upload-image-component.js";
 import { getToken } from "../index.js";
 import { goToPage } from "../index.js";
 import { POSTS_PAGE } from "../routes.js";
+import { getElement } from "./getElById.js";
 
 export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
     let imageUrl = "";
@@ -40,13 +41,9 @@ export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
 
         appEl.innerHTML = appHtml;
 
-        const uploadImageContainer = appEl.querySelector(
-            ".upload-image-container"
-        );
-
-        if (uploadImageContainer) {
+        if (getElement().uploadImageContainer) {
             renderUploadImageComponent({
-                element: appEl.querySelector(".upload-image-container"),
+                element: getElement().uploadImageContainer,
                 onImageUrlChange(newImageUrl) {
                     imageUrl = newImageUrl;
                 },
@@ -54,11 +51,8 @@ export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
         }
 
         document.getElementById("add-button").addEventListener("click", () => {
-            const descriptionInput =
-                document.getElementById("descriptionInput");
-
             onAddPostClick({
-                description: descriptionInput.value,
+                description: getElement().descriptionInput.value,
                 imageUrl: imageUrl,
                 token: getToken(),
             });

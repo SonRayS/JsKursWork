@@ -18,7 +18,6 @@ import {
 } from "./helpers.js";
 import { onAddPostClick } from "./api.js";
 import { userPosts } from "./api.js";
-import { renderHeaderComponent } from "./components/header-component.js";
 import { getElement } from "./components/getElById.js";
 
 /* =========================================================================================== */
@@ -110,11 +109,9 @@ export const goToPage = (newPage, data) => {
 /* =========================================================================================== */
 
 const renderApp = () => {
-    const appEl = document.getElementById("app");
-
     if (page === LOADING_PAGE) {
         return renderLoadingPageComponent({
-            appEl,
+            appEl: getElement().appEl,
             user,
             goToPage,
         });
@@ -122,7 +119,7 @@ const renderApp = () => {
 
     if (page === AUTH_PAGE) {
         return renderAuthPageComponent({
-            appEl,
+            appEl: getElement().appEl,
             setUser: (newUser) => {
                 user = newUser;
                 saveUserToLocalStorage(user);
@@ -135,21 +132,21 @@ const renderApp = () => {
 
     if (page === ADD_POSTS_PAGE) {
         return renderAddPostPageComponent({
-            appEl,
+            appEl: getElement().appEl,
             onAddPostClick,
         });
     }
 
     if (page === POSTS_PAGE) {
         return renderPostsPageComponent({
-            appEl,
+            appEl: getElement().appEl,
         });
     }
 
     if (page === USER_POSTS_PAGE) {
         // TODO: реализовать страницу фотографию пользвателя
         return renderPostsPageComponent({
-            appEl,
+            appEl: getElement().appEl,
         });
     }
 };

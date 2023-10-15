@@ -1,5 +1,6 @@
 import { loginUser, registerUser } from "../api.js";
 import { renderUploadImageComponent } from "./upload-image-component.js";
+import { getElement } from "./getElById.js";
 
 export function renderAuthPageComponent({ appEl, setUser }) {
     let isLoginMode = true;
@@ -56,16 +57,12 @@ export function renderAuthPageComponent({ appEl, setUser }) {
         // Не вызываем перерендер, чтобы не сбрасывалась заполненная форма
         // Точечно обновляем кусочек дом дерева
         const setError = (message) => {
-            appEl.querySelector(".form-error").textContent = message;
+            getElement().fromError.textContent = message;
         };
 
-        const uploadImageContainer = appEl.querySelector(
-            ".upload-image-container"
-        );
-
-        if (uploadImageContainer) {
+        if (getElement().uploadImageContainer) {
             renderUploadImageComponent({
-                element: appEl.querySelector(".upload-image-container"),
+                element: getElement().uploadImageContainer,
                 onImageUrlChange(newImageUrl) {
                     imageUrl = newImageUrl;
                 },
@@ -78,9 +75,8 @@ export function renderAuthPageComponent({ appEl, setUser }) {
                 setError("");
 
                 if (isLoginMode) {
-                    const login = document.getElementById("login-input").value;
-                    const password =
-                        document.getElementById("password-input").value;
+                    const login = getElement().loginInput.value;
+                    const password = getElement().passwordInput.value;
 
                     if (!login) {
                         alert("Введите логин");
@@ -104,10 +100,9 @@ export function renderAuthPageComponent({ appEl, setUser }) {
                             setError(error.message);
                         });
                 } else {
-                    const login = document.getElementById("login-input").value;
-                    const name = document.getElementById("name-input").value;
-                    const password =
-                        document.getElementById("password-input").value;
+                    const login = getElement().loginInput.value;
+                    const name = getElement().nameInput.value;
+                    const password = getElement().passwordInput.value;
                     if (!name) {
                         alert("Введите имя");
                         return;

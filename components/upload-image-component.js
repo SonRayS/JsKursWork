@@ -1,4 +1,5 @@
 import { uploadImage } from "../api.js";
+import { getElement } from "./getElById.js";
 
 export function renderUploadImageComponent({ element, onImageUrlChange }) {
     let imageUrl = "";
@@ -34,9 +35,8 @@ export function renderUploadImageComponent({ element, onImageUrlChange }) {
         fileInputElement?.addEventListener("change", () => {
             const file = fileInputElement.files[0];
             if (file) {
-                const lableEl = document.querySelector(".file-upload-label");
-                lableEl.setAttribute("disabled", true);
-                lableEl.textContent = "Загружаю файл...";
+                getElement().lableEl.setAttribute("disabled", true);
+                getElement().lableEl.textContent = "Загружаю файл...";
                 uploadImage({ file }).then(({ fileUrl }) => {
                     imageUrl = fileUrl;
                     onImageUrlChange(imageUrl);
