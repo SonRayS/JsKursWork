@@ -38,7 +38,7 @@ export function renderPostsPageComponent({ appEl }) {
                   ${el.description}
                 </p>
                 <p class="post-date">
-                  19 минут назад
+                  ${el.createdAt}
                 </p>
                 </li>
                 </ul>
