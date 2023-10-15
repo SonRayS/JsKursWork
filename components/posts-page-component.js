@@ -2,6 +2,7 @@ import { USER_POSTS_PAGE } from "../routes.js";
 import { renderHeaderComponent } from "./header-component.js";
 import { posts, goToPage } from "../index.js";
 import { getElement } from "./getElById.js";
+import { format } from "date-fns";
 
 export function renderPostsPageComponent({ appEl }) {
     // TODO: реализовать рендер постов из api
