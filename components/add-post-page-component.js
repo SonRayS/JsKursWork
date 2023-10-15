@@ -56,6 +56,7 @@ export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
                 imageUrl: imageUrl,
                 token: getToken(),
             });
+            render();
             goToPage(POSTS_PAGE);
         });
     };
