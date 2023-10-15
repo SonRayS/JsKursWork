@@ -2,7 +2,7 @@ import { USER_POSTS_PAGE } from "../routes.js";
 import { renderHeaderComponent } from "./header-component.js";
 import { posts, goToPage } from "../index.js";
 import { getElement } from "./getElById.js";
-import { format } from "date-fns";
+import { dateFns } from "./formatDate.js";
 
 export function renderPostsPageComponent({ appEl }) {
     // TODO: реализовать рендер постов из api
@@ -20,7 +20,9 @@ export function renderPostsPageComponent({ appEl }) {
                 <ul class="posts">
                 <li class="post">
                 <div class="post-header" data-user-id="${el.user.id}">
-                    <img src="${el.user.imageUrl}" class="post-header__user-image">
+                    <img src="${
+                        el.user.imageUrl
+                    }" class="post-header__user-image">
                     <p class="post-header__user-name">${el.user.name}</p>
                 </div>
                 <div class="post-image-container">
@@ -39,7 +41,7 @@ export function renderPostsPageComponent({ appEl }) {
                   ${el.description}
                 </p>
                 <p class="post-date">
-                  ${el.createdAt}
+                  ${dateFns(el.createdAt)}
                 </p>
                 </li>
                 </ul>
