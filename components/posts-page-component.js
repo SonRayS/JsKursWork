@@ -5,12 +5,13 @@ import { getElement } from "./getElById.js";
 import { dateFns } from "./formatDate.js";
 import { handerLike } from "./isLike.js";
 import { page } from "../index.js";
+import { imgUserPosts } from "./image-user-posts.js";
 
 /* -------------------------------------------------- */
 
 export function renderPostsPageComponent({ appEl }) {
-    /* console.log("Актуальный список постов:", posts);
-    console.log(page); */
+    console.log("Актуальный список постов:", posts);
+    /* console.log(page); */
 
     const appHtml = posts
         .map((el, index) => {
@@ -19,19 +20,15 @@ export function renderPostsPageComponent({ appEl }) {
                 <div class="header-container"></div>
                 <ul class="posts">
                 <li class="post" data-index=${index}>
-              ${
-                  page === POSTS_PAGE
-                      ? `<div class="post-header" data-user-id="${el.user.id}">
-                    <img src="${el.user.imageUrl}" 
-                    class="post-header__user-image">
-                    <p class="post-header__user-name">${el.user.name}</p>
-                </div>`
-                      : `<div class="posts-user-header data-user-id="${el.user.id}">
-                      <img src="${el.user.imageUrl}" class="posts-user-header__user-image">
-                      <p class="posts-user-header__user-name">${el.user.name}</p>
-                  </div>`
-              }
 
+                ${
+                    page === USER_POSTS_PAGE && el.id === posts[0].id
+                        ? `<div class="posts-user-header data-user-id="${el.user.id}">
+                                  <img src="${el.user.imageUrl}" class="posts-user-header__user-image">
+                                  <p class="posts-user-header__user-name">${el.user.name}</p>
+                          </div>`
+                        : imgUserPosts({ el })
+                }          
                 <div class="post-image-container" data-index="${index}">
                   <img class="post-image" src="${el.imageUrl}">
                 </div>
