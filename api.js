@@ -104,3 +104,35 @@ export function userPosts({ userIdTest }) {
             return data.posts;
         });
 }
+
+export function handerApiLike({ isLike, token }) {
+    return fetch(postsHost + `/${isLike}/like`, {
+        method: "POST",
+        headers: {
+            Authorization: token,
+        },
+    })
+        .then((response) => {
+            return response.json();
+        })
+        .then((response) => {
+            console.log(response);
+            return response;
+        });
+}
+
+export function handerApiDislike({ isLike, token }) {
+    return fetch(postsHost + `/${isLike}/dislike`, {
+        method: "POST",
+        headers: {
+            Authorization: token,
+        },
+    })
+        .then((response) => {
+            return response.json();
+        })
+        .then((response) => {
+            console.log(response);
+            return response;
+        });
+}

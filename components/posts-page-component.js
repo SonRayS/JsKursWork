@@ -3,6 +3,7 @@ import { renderHeaderComponent } from "./header-component.js";
 import { posts, goToPage } from "../index.js";
 import { getElement } from "./getElById.js";
 import { dateFns } from "./formatDate.js";
+import { handerLike } from "./isLike.js";
 
 export function renderPostsPageComponent({ appEl }) {
     // TODO: реализовать рендер постов из api
@@ -29,11 +30,19 @@ export function renderPostsPageComponent({ appEl }) {
                   <img class="post-image" src="${el.imageUrl}">
                 </div>
                 <div class="post-likes">
-                  <button data-post-id="${el.id}" class="like-button">
-                    <img src="./assets/images/like-active.svg">
+                  <button data-index="${index}" 
+                  data-post-id="${el.id}" 
+                  data-isLike="${el.isLiked}" class="like-button">
+                    <img src="./assets/images/like-active.svg"> 
                   </button>
                   <p class="post-likes-text">
-                    Нравится: <strong>${el.likes.length}</strong>
+                  Нравится: <strong>${
+                      el.likes.length >= 1 ? el.likes[0].name : "0"
+                  }</strong> ${
+                el.likes.length - 1 > 0
+                    ? "и ещё" + " " + (el.likes.length - 1)
+                    : ""
+            }
                   </p>
                 </div>
                 <p class="post-text">

@@ -9,6 +9,7 @@ export function getElement() {
     const passwordInput = document.getElementById("password-input");
     const nameInput = document.getElementById("name-input");
     const lableEl = document.querySelector(".file-upload-label");
+    const btnLike = document.querySelectorAll(".like-button");
 
     const module = {
         HeaderComponent: HeaderComponent,
@@ -21,6 +22,7 @@ export function getElement() {
         passwordInput: passwordInput,
         nameInput: nameInput,
         lableEl: lableEl,
+        btnLike: btnLike,
     };
 
     return module;

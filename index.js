@@ -100,15 +100,13 @@ export const goToPage = (newPage, data) => {
     throw new Error("страницы не существует");
 };
 
-/* =========================================================================================== */
-
 /**
  * функц которая запускает страницу renderApp
  */
 
 /* =========================================================================================== */
 
-const renderApp = () => {
+export const renderApp = () => {
     if (page === LOADING_PAGE) {
         return renderLoadingPageComponent({
             appEl: getElement().appEl,
