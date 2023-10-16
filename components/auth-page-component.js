@@ -91,8 +91,16 @@ export function renderAuthPageComponent({ appEl, setUser }) {
                     }
 
                     loginUser({
-                        login: login,
-                        password: password,
+                        login: login
+                            .replaceAll("<", "&lt")
+                            .replaceAll(">", "&gt")
+                            .replaceAll('"', "&quot;")
+                            .replaceAll("&", "&amp;"),
+                        password: password
+                            .replaceAll("<", "&lt")
+                            .replaceAll(">", "&gt")
+                            .replaceAll('"', "&quot;")
+                            .replaceAll("&", "&amp;"),
                     })
                         .then((user) => {
                             setUser(user.user);
@@ -125,9 +133,21 @@ export function renderAuthPageComponent({ appEl, setUser }) {
                     }
 
                     registerUser({
-                        login: login,
-                        password: password,
-                        name: name,
+                        login: login
+                            .replaceAll("<", "&lt")
+                            .replaceAll(">", "&gt")
+                            .replaceAll('"', "&quot;")
+                            .replaceAll("&", "&amp;"),
+                        password: password
+                            .replaceAll("<", "&lt")
+                            .replaceAll(">", "&gt")
+                            .replaceAll('"', "&quot;")
+                            .replaceAll("&", "&amp;"),
+                        name: name
+                            .replaceAll("<", "&lt")
+                            .replaceAll(">", "&gt")
+                            .replaceAll('"', "&quot;")
+                            .replaceAll("&", "&amp;"),
                         imageUrl,
                     })
                         .then((user) => {

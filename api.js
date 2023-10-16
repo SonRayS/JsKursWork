@@ -87,9 +87,12 @@ export function onAddPostClick({ description, imageUrl, token }) {
     });
 }
 
-export function userPosts({ userIdTest }) {
+export function userPosts({ userIdTest, token }) {
     return fetch(postsHost + `/user-posts/${userIdTest}`, {
         method: "GET",
+        headers: {
+            Authorization: token,
+        },
     })
         .then((response) => {
             return response.json();

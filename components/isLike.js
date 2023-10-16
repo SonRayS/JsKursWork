@@ -6,6 +6,9 @@ import { renderApp } from "..";
 import { getPosts } from "../api";
 import { setPosts } from "..";
 import { posts } from "..";
+import { POSTS_PAGE, USER_POSTS_PAGE } from "../routes.js";
+import { page } from "../index.js";
+import { userPosts } from "../api";
 
 /* -------------------------------------------------- */
 
@@ -24,10 +27,20 @@ export function handerLike() {
                         posts[index].isLiked = false;
                     })
                     .then(() => {
-                        getPosts({ token: getToken() }).then((response) => {
-                            setPosts(response);
-                            renderApp();
-                        });
+                        if (page === POSTS_PAGE) {
+                            getPosts({ token: getToken() }).then((response) => {
+                                setPosts(response);
+                                renderApp();
+                            });
+                        } else {
+                            userPosts({
+                                userIdTest: posts[index].user.id,
+                                token: getToken(),
+                            }).then((response) => {
+                                setPosts(response);
+                                renderApp();
+                            });
+                        }
                     });
             } else {
                 handerApiLike({
@@ -38,10 +51,20 @@ export function handerLike() {
                         posts[index].isLiked = true;
                     })
                     .then(() => {
-                        getPosts({ token: getToken() }).then((response) => {
-                            setPosts(response);
-                            renderApp();
-                        });
+                        if (page === POSTS_PAGE) {
+                            getPosts({ token: getToken() }).then((response) => {
+                                setPosts(response);
+                                renderApp();
+                            });
+                        } else {
+                            userPosts({
+                                userIdTest: posts[index].user.id,
+                                token: getToken(),
+                            }).then((response) => {
+                                setPosts(response);
+                                renderApp();
+                            });
+                        }
                     });
             }
         });
@@ -61,12 +84,21 @@ export function handerLike() {
                         posts[index].isLiked = false;
                     })
                     .then(() => {
-                        getPosts({ token: getToken() }).then((response) => {
-                            setPosts(response);
-                            renderApp();
-                        });
+                        if (page === POSTS_PAGE) {
+                            getPosts({ token: getToken() }).then((response) => {
+                                setPosts(response);
+                                renderApp();
+                            });
+                        } else if (page === USER_POSTS_PAGE) {
+                            userPosts({
+                                userIdTest: posts[index].user.id,
+                            }).then((response) => {
+                                setPosts(response);
+                                renderApp();
+                            });
+                        }
                     });
-            } else {
+            } else if (page === USER_POSTS_PAGE) {
                 handerApiLike({
                     isLike: posts[index].id,
                     token: getToken(),
@@ -75,10 +107,19 @@ export function handerLike() {
                         posts[index].isLiked = true;
                     })
                     .then(() => {
-                        getPosts({ token: getToken() }).then((response) => {
-                            setPosts(response);
-                            renderApp();
-                        });
+                        if (page === POSTS_PAGE) {
+                            getPosts({ token: getToken() }).then((response) => {
+                                setPosts(response);
+                                renderApp();
+                            });
+                        } else if (page === USER_POSTS_PAGE) {
+                            userPosts({
+                                userIdTest: posts[index].user.id,
+                            }).then((response) => {
+                                setPosts(response);
+                                renderApp();
+                            });
+                        }
                     });
             }
         });

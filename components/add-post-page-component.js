@@ -5,7 +5,6 @@ import { POSTS_PAGE } from "../routes.js";
 import { getElement } from "./getElById.js";
 
 /* -------------------------------------------------- */
-
 export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
     let imageUrl = "";
 
@@ -53,8 +52,20 @@ export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
         }
 
         document.getElementById("add-button").addEventListener("click", () => {
+            if (!getElement().descriptionInput.value) {
+                alert("Введите описание поста");
+                return;
+            }
+            if (!imageUrl) {
+                alert("Добавьте картинку");
+                return;
+            }
             onAddPostClick({
-                description: getElement().descriptionInput.value,
+                description: getElement()
+                    .descriptionInput.value.replaceAll("<", "&lt")
+                    .replaceAll(">", "&gt")
+                    .replaceAll('"', "&quot;")
+                    .replaceAll("&", "&amp;"),
                 imageUrl: imageUrl,
                 token: getToken(),
             });
