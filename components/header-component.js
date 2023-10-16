@@ -1,6 +1,8 @@
 import { goToPage, logout, user } from "../index.js";
 import { ADD_POSTS_PAGE, AUTH_PAGE, POSTS_PAGE } from "../routes.js";
 
+/* -------------------------------------------------- */
+
 export function renderHeaderComponent({ element }) {
     element.innerHTML = `
   <div class="page-header">

@@ -1,6 +1,8 @@
 import { renderHeaderComponent } from "./header-component.js";
 import { getElement } from "./getElById.js";
 
+/* -------------------------------------------------- */
+
 export function renderLoadingPageComponent({ appEl, user, goToPage }) {
     const appHtml = `
               <div class="page-container">

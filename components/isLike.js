@@ -1,29 +1,50 @@
 import { getElement } from "./getElById";
 import { handerApiLike } from "../api";
 import { handerApiDislike } from "../api";
-import { renderApp } from "..";
 import { getToken } from "..";
+import { renderApp } from "..";
+import { getPosts } from "../api";
+import { setPosts } from "..";
+import { posts } from "..";
 
 /* -------------------------------------------------- */
 
-export function handerLike({ user }) {
-    for (const el of getElement().btnLike) {
-        el.addEventListener("click", (event) => {
+export function handerLike() {
+    getElement().btnLike.forEach((btnLike) => {
+        btnLike.addEventListener("click", (event) => {
             event.stopPropagation();
+            const index = btnLike.dataset.index;
+            const postId = btnLike.dataset.postId;
 
-            const index = el.dataset.index;
-
-            if (user[index].isLiked === false) {
-                handerApiLike({ isLike: user[index].id, token: getToken() });
+            if (posts[index].isLiked) {
+                handerApiDislike({
+                    isLike: posts[index].id,
+                    token: getToken(),
+                })
+                    .then(() => {
+                        posts[index].isLiked = false;
+                    })
+                    .then(() => {
+                        getPosts({ token: getToken() }).then((response) => {
+                            setPosts(response);
+                            renderApp();
+                        });
+                    });
             } else {
-                handerApiDislike({ isLike: user[index].id, token: getToken() });
+                handerApiLike({
+                    isLike: posts[index].id,
+                    token: getToken(),
+                })
+                    .then(() => {
+                        posts[index].isLiked = true;
+                    })
+                    .then(() => {
+                        getPosts({ token: getToken() }).then((response) => {
+                            setPosts(response);
+                            renderApp();
+                        });
+                    });
             }
-            renderApp();
         });
-    }
+    });
 }
-
-/* Если мы обращаемся к true ? false через дату html то в
- зависимости от ответа мы выполняем запрос в api меняя при 
- этом кнопку и счетчик */
-/*like-not-active.svg-->*/

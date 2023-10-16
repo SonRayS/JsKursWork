@@ -5,14 +5,11 @@ import { getElement } from "./getElById.js";
 import { dateFns } from "./formatDate.js";
 import { handerLike } from "./isLike.js";
 
+/* -------------------------------------------------- */
+
 export function renderPostsPageComponent({ appEl }) {
-    // TODO: реализовать рендер постов из api
     console.log("Актуальный список постов:", posts);
 
-    /**
-     * TODO: чтобы отформатировать дату создания поста в виде "19 минут назад"
-     * можно использовать https://date-fns.org/v2.29.3/docs/formatDistanceToNow
-     */
     const appHtml = posts
         .map((el, index) => {
             return `
@@ -33,7 +30,11 @@ export function renderPostsPageComponent({ appEl }) {
                   <button data-index="${index}" 
                   data-post-id="${el.id}" 
                   data-isLike="${el.isLiked}" class="like-button">
-                    <img src="./assets/images/like-active.svg"> 
+                  <img src="${
+                      el.isLiked
+                          ? `./assets/images/like-active.svg`
+                          : `./assets/images/like-not-active.svg`
+                  }">
                   </button>
                   <p class="post-likes-text">
                   Нравится: <strong>${
@@ -71,4 +72,6 @@ export function renderPostsPageComponent({ appEl }) {
             });
         });
     }
+
+    handerLike();
 }

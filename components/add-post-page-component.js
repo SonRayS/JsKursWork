@@ -4,6 +4,8 @@ import { goToPage } from "../index.js";
 import { POSTS_PAGE } from "../routes.js";
 import { getElement } from "./getElById.js";
 
+/* -------------------------------------------------- */
+
 export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
     let imageUrl = "";
 

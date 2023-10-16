@@ -25,6 +25,9 @@ import { getElement } from "./components/getElById.js";
 export let user = getUserFromLocalStorage();
 export let page = null;
 export let posts = [];
+export const setPosts = (newPosts) => {
+    posts = newPosts;
+};
 
 export const getToken = () => {
     const token = user ? `Bearer ${user.token}` : undefined;
@@ -93,12 +96,16 @@ export const goToPage = (newPage, data) => {
         }
 
         page = newPage;
+
         renderApp();
+
         return;
     }
 
     throw new Error("страницы не существует");
 };
+
+/* =========================================================================================== */
 
 /**
  * функц которая запускает страницу renderApp
