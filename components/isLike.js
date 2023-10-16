@@ -14,7 +14,43 @@ export function handerLike() {
         btnLike.addEventListener("click", (event) => {
             event.stopPropagation();
             const index = btnLike.dataset.index;
-            const postId = btnLike.dataset.postId;
+
+            if (posts[index].isLiked) {
+                handerApiDislike({
+                    isLike: posts[index].id,
+                    token: getToken(),
+                })
+                    .then(() => {
+                        posts[index].isLiked = false;
+                    })
+                    .then(() => {
+                        getPosts({ token: getToken() }).then((response) => {
+                            setPosts(response);
+                            renderApp();
+                        });
+                    });
+            } else {
+                handerApiLike({
+                    isLike: posts[index].id,
+                    token: getToken(),
+                })
+                    .then(() => {
+                        posts[index].isLiked = true;
+                    })
+                    .then(() => {
+                        getPosts({ token: getToken() }).then((response) => {
+                            setPosts(response);
+                            renderApp();
+                        });
+                    });
+            }
+        });
+    });
+
+    getElement().likeDoubleClick.forEach((likeDoubleClick) => {
+        likeDoubleClick.addEventListener("dblclick", (event) => {
+            event.stopPropagation();
+            const index = likeDoubleClick.dataset.index;
 
             if (posts[index].isLiked) {
                 handerApiDislike({

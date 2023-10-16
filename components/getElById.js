@@ -10,6 +10,7 @@ export function getElement() {
     const nameInput = document.getElementById("name-input");
     const lableEl = document.querySelector(".file-upload-label");
     const btnLike = document.querySelectorAll(".like-button");
+    const likeDoubleClick = document.querySelectorAll(".post-image-container");
 
     const module = {
         HeaderComponent: HeaderComponent,
@@ -23,6 +24,7 @@ export function getElement() {
         nameInput: nameInput,
         lableEl: lableEl,
         btnLike: btnLike,
+        likeDoubleClick: likeDoubleClick,
     };
 
     return module;

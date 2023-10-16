@@ -32,7 +32,7 @@ export function renderPostsPageComponent({ appEl }) {
                   </div>`
               }
 
-                <div class="post-image-container">
+                <div class="post-image-container" data-index="${index}">
                   <img class="post-image" src="${el.imageUrl}">
                 </div>
                 <div class="post-likes">
