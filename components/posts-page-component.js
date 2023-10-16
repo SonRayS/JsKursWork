@@ -1,14 +1,16 @@
-import { USER_POSTS_PAGE } from "../routes.js";
+import { POSTS_PAGE, USER_POSTS_PAGE } from "../routes.js";
 import { renderHeaderComponent } from "./header-component.js";
 import { posts, goToPage } from "../index.js";
 import { getElement } from "./getElById.js";
 import { dateFns } from "./formatDate.js";
 import { handerLike } from "./isLike.js";
+import { page } from "../index.js";
 
 /* -------------------------------------------------- */
 
 export function renderPostsPageComponent({ appEl }) {
-    console.log("Актуальный список постов:", posts);
+    /* console.log("Актуальный список постов:", posts);
+    console.log(page); */
 
     const appHtml = posts
         .map((el, index) => {
@@ -16,13 +18,20 @@ export function renderPostsPageComponent({ appEl }) {
               <div class="page-container">
                 <div class="header-container"></div>
                 <ul class="posts">
-                <li class="post">
-                <div class="post-header" data-user-id="${el.user.id}">
-                    <img src="${
-                        el.user.imageUrl
-                    }" class="post-header__user-image">
+                <li class="post" data-index=${index}>
+              ${
+                  page === POSTS_PAGE
+                      ? `<div class="post-header" data-user-id="${el.user.id}">
+                    <img src="${el.user.imageUrl}" 
+                    class="post-header__user-image">
                     <p class="post-header__user-name">${el.user.name}</p>
-                </div>
+                </div>`
+                      : `<div class="posts-user-header data-user-id="${el.user.id}">
+                      <img src="${el.user.imageUrl}" class="posts-user-header__user-image">
+                      <p class="posts-user-header__user-name">${el.user.name}</p>
+                  </div>`
+              }
+
                 <div class="post-image-container">
                   <img class="post-image" src="${el.imageUrl}">
                 </div>

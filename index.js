@@ -1,4 +1,3 @@
-/* =========================================================================================== */
 import { getPosts } from "./api.js";
 import { renderAddPostPageComponent } from "./components/add-post-page-component.js";
 import { renderAuthPageComponent } from "./components/auth-page-component.js";
@@ -149,7 +148,6 @@ export const renderApp = () => {
     }
 
     if (page === USER_POSTS_PAGE) {
-        // TODO: реализовать страницу фотографию пользвателя
         return renderPostsPageComponent({
             appEl: getElement().appEl,
         });

@@ -110,7 +110,7 @@ export function handerApiLike({ isLike, token }) {
             return response.json();
         })
         .then((response) => {
-            console.log(response);
+            /* console.log(response); */
             return response;
         });
 }
@@ -126,7 +126,7 @@ export function handerApiDislike({ isLike, token }) {
             return response.json();
         })
         .then((response) => {
-            console.log(response);
+            /* console.log(response); */
             return response;
         });
 }
