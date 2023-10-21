@@ -58,7 +58,6 @@ export const goToPage = (newPage, data) => {
         ].includes(newPage)
     ) {
         if (newPage === ADD_POSTS_PAGE) {
-            // Если пользователь не авторизован, то отправляем его на авторизацию перед добавлением поста
             page = user ? ADD_POSTS_PAGE : AUTH_PAGE;
             return renderApp();
         }
@@ -80,10 +79,7 @@ export const goToPage = (newPage, data) => {
         }
 
         if (newPage === USER_POSTS_PAGE) {
-            page = LOADING_PAGE;
-            renderApp();
-
-            return userPosts({ userIdTest: data.userId })
+            return userPosts({ userIdTest: data.userId, token: getToken() })
                 .then((newPosts) => {
                     page = USER_POSTS_PAGE;
                     posts = newPosts;
@@ -151,7 +147,6 @@ export const renderApp = () => {
     if (page === USER_POSTS_PAGE) {
         return renderPostsPageComponent({
             appEl: getElement().appEl,
-            token: getToken(),
         });
     }
 };

@@ -9,7 +9,6 @@ import { posts } from "..";
 import { POSTS_PAGE, USER_POSTS_PAGE } from "../routes.js";
 import { page } from "../index.js";
 import { userPosts } from "../api";
-import { renderPostsPageComponent } from "./posts-page-component";
 
 /* -------------------------------------------------- */
 
@@ -95,16 +94,17 @@ export function handerLike() {
                                 setPosts(response);
                                 renderApp();
                             });
-                        } else if (page === USER_POSTS_PAGE) {
+                        } else {
                             userPosts({
                                 userIdTest: posts[index].user.id,
+                                token: getToken(),
                             }).then((response) => {
                                 setPosts(response);
                                 renderApp();
                             });
                         }
                     });
-            } else if (page === USER_POSTS_PAGE) {
+            } else {
                 handerApiLike({
                     isLike: posts[index].id,
                     token: getToken(),
@@ -118,9 +118,10 @@ export function handerLike() {
                                 setPosts(response);
                                 renderApp();
                             });
-                        } else if (page === USER_POSTS_PAGE) {
+                        } else {
                             userPosts({
                                 userIdTest: posts[index].user.id,
+                                token: getToken(),
                             }).then((response) => {
                                 setPosts(response);
                                 renderApp();
