@@ -110,6 +110,11 @@ export function handerApiLike({ isLike, token }) {
         },
     })
         .then((response) => {
+            if (response.status === 401) {
+                alert("Лайкать посты могут только авторизованные пользователи");
+                throw new Error("Нет авторизации");
+            }
+
             return response.json();
         })
         .then((response) => {
@@ -126,6 +131,9 @@ export function handerApiDislike({ isLike, token }) {
         },
     })
         .then((response) => {
+            if (response.status === 401) {
+                throw new Error("Нет авторизации");
+            }
             return response.json();
         })
         .then((response) => {
