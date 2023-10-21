@@ -9,6 +9,7 @@ import { posts } from "..";
 import { POSTS_PAGE, USER_POSTS_PAGE } from "../routes.js";
 import { page } from "../index.js";
 import { userPosts } from "../api";
+import { renderPostsPageComponent } from "./posts-page-component";
 
 /* -------------------------------------------------- */
 
@@ -69,6 +70,11 @@ export function handerLike() {
             }
         });
     });
+
+    /* -------------------------------------------------- */
+    /* -------------------------------------------------- */
+    /* -------------------------------------------------- */
+    /* -------------------------------------------------- */
 
     getElement().likeDoubleClick.forEach((likeDoubleClick) => {
         likeDoubleClick.addEventListener("dblclick", (event) => {

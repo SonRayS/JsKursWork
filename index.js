@@ -144,12 +144,14 @@ export const renderApp = () => {
     if (page === POSTS_PAGE) {
         return renderPostsPageComponent({
             appEl: getElement().appEl,
+            token: getToken(),
         });
     }
 
     if (page === USER_POSTS_PAGE) {
         return renderPostsPageComponent({
             appEl: getElement().appEl,
+            token: getToken(),
         });
     }
 };
